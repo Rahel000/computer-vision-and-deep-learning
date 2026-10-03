@@ -1,7 +1,7 @@
 # Transfer Learning: Klasifikasi Sendok vs Garpu
 
 ## Dataset
-100 foto kamera HP (50 spoon, 50 fork) di folder `spoon/` dan `fork/`, metadata di `metadata.csv`.
+100 foto (50 spoon, 50 fork) di folder `spoon/` dan `fork/`, metadata di `metadata.csv`.
 Split acak (seed 42): 80 train, 20 validation. Resize 224x224, normalisasi ImageNet.
 
 ## Model
