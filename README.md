@@ -12,10 +12,10 @@ Hasil di bawah berasal dari run terakhir (output tersimpan di notebook).
 
 | Parameter | Hasil |
 |---|---|
-| Akurasi Training akhir | 97,5% |
-| Akurasi Validation akhir | 90% |
-| Akurasi Validation terbaik | 95% (epoch 3-5, 7, 9) |
-| Validation loss akhir | 0.418 |
+| Train acc akhir | 97,5% |
+| Val acc akhir | 90% |
+| Val acc terbaik | 95% (epoch 3-5, 7, 9) |
+| Val loss akhir | 0.418 |
 | Waktu training (10 epoch) | 7.3 s |
 | Latensi inferensi (CPU) | min 118.9 ms, rata-rata 139.3 ms, maks 196.2 ms |
 
