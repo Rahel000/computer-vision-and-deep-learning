@@ -5,43 +5,50 @@
 Split acak (seed 42): 80 train, 20 validation. Resize 224x224, normalisasi ImageNet.
 
 ## Model
-ResNet-50 pretrained ImageNet, classifier diganti menjadi 2 output.
+ResNet-50 pretrained ImageNet dengan metode **feature extraction**: seluruh bobot ResNet
+dibekukan, hanya classifier baru (2 output: spoon/fork) yang dilatih.
+Optimizer Adam (lr 0.001), batch size 16, 10 epoch.
 Hasil di bawah berasal dari run ke-4 (output tersimpan di notebook).
 
-| Metode | Val acc akhir | Val acc terbaik | Val loss akhir | Waktu training | Latensi inferensi |
-|---|---|---|---|---|---|
-| Feature extraction | 80% | 85% (epoch 5-8) | 0.465 | 7.2 s | XX ms/foto |
-| Fine-tuning layer4 | 95% | 95% (epoch 2-4, 6-10) | 0.160 | 8.5 s | XX ms/foto |
+| Metrik | Hasil |
+|---|---|
+| Train acc akhir | 98,75% |
+| Val acc akhir | 80% |
+| Val acc terbaik | 85% (epoch 5-8) |
+| Val loss akhir | 0.465 |
+| Waktu training | 7.2 s |
+| Latensi inferensi | 6.4 ms/foto |
 
 ## Analisis
 Seed PyTorch tidak dikunci, sehingga angka tiap run berbeda. Karena itu analisis berfokus
-pada pola yang muncul di beberapa kali run, bukan angka persis.
+pada pola, bukan angka persis.
 
-- **Akurasi:** pada run ini fine-tuning berakhir di 95% dan feature extraction di 80%
-  (selisih 3 dari 20 foto). Pada run awal, keduanya sama-sama berakhir di 90%, jadi besar
-  selisih akurasi berubah-ubah antar run dan belum cukup untuk disimpulkan signifikan.
-- **Kecepatan belajar dan loss:** fine-tuning layer4 konsisten belajar lebih cepat. Val acc
-  sudah 95% sejak epoch 2 dan val loss akhir 0.160, sedangkan feature extraction masih
-  0.465 dan val loss-nya masih turun di epoch 10.
-- **Overfitting:** pada fine-tuning, train acc mencapai 100% sejak epoch 5 dan val loss naik
-  tipis setelah epoch 8 (0.142 menjadi 0.160), tetapi val acc tetap 95%, sehingga overfitting
-  tergolong ringan pada run ini. Pada run lain gejalanya lebih jelas (val acc turun).
-  Feature extraction memiliki jarak train-validation yang cukup besar (98,75% vs 80%),
-  yang mungkin menandakan fitur ImageNet yang dibekukan kurang pas untuk tugas ini.
-- **Waktu dan latensi:** selisih waktu training sekitar 1 detik dan arahnya berbalik antar
-  run, sehingga tidak bermakna. Latensi inferensi kedua metode hampir sama karena arsitekturnya
-  sama (ResNet-50).
-- **Kesimpulan:** pada dataset sekecil ini, fine-tuning layer4 memberi loss lebih rendah dan
-  belajar lebih cepat, namun berisiko overfitting sehingga sebaiknya dihentikan lebih awal.
-  Feature extraction lebih sederhana tetapi pada percobaan ini hasilnya lebih rendah.
+- **Model belajar:** train acc naik dari 43,75% (epoch 1, setara tebakan acak) ke 98,75%,
+  dan val loss turun terus dari 0.668 ke 0.465. Ini menandakan classifier baru berhasil
+  memanfaatkan fitur ImageNet untuk membedakan sendok dan garpu.
+- **Akurasi validation:** naik dari 65% ke puncak 85% (epoch 5-8), lalu 80% di dua epoch
+  terakhir. Dengan 20 foto validation, penurunan itu setara 1 foto (5%) dan masih bisa
+  dianggap fluktuasi. Pada run awal, val acc akhir mencapai 90%, jadi hasil akhirnya
+  berkisar 80-90% antar run.
+- **Jarak train-validation:** train acc (98,75%) jauh di atas val acc (80%). Ini bisa
+  menandakan model lebih cocok dengan foto latihan daripada foto baru, tetapi karena
+  val loss belum naik, belum ada bukti overfitting yang jelas. Jumlah data yang kecil
+  membuat kesimpulan ini belum pasti.
+- **Waktu dan latensi:** training 10 epoch hanya sekitar 7 detik karena yang dilatih hanya
+  classifier dan GPU dipakai. Latensi inferensi adalah waktu menebak satu foto setelah
+  model selesai dilatih.
+- **Kesimpulan:** feature extraction dengan ResNet-50 pretrained sudah cukup untuk
+  mengklasifikasi sendok dan garpu dengan akurasi sekitar 80-90% pada dataset kecil ini,
+  dengan waktu training yang sangat singkat. Hasil bisa ditingkatkan dengan lebih banyak
+  data atau fine-tuning sebagian layer.
 
 ## Keterbatasan
 Validation hanya 20 foto, sehingga 1 foto salah = 5%. Eksperimen dijalankan empat kali tanpa
-mengunci seed, sehingga hasilnya bervariasi. Pengulangan dengan beberapa seed dan test set
-terpisah akan memberi evaluasi yang lebih andal. Latensi diukur pada GPU Colab (XX).
+mengunci seed, sehingga hasilnya bervariasi. Tidak ada test set terpisah. Pengulangan dengan
+beberapa seed dan test set akan memberi evaluasi yang lebih andal. Latensi diukur pada GPU
+Colab (6.4 ms/foto).
 
 ## Cara menjalankan
 Buka `transfer-learning/notebook.ipynb` di Google Colab, aktifkan GPU, jalankan semua cell.
 
 ![Feature extraction](grafik_feature_extraction.png)
-![Perbandingan](grafik_perbandingan.png)
