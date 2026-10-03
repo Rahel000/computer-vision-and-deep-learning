@@ -10,7 +10,7 @@ dibekukan, hanya classifier baru (2 output: spoon/fork) yang dilatih.
 Optimizer Adam (lr 0.001), batch size 16, 10 epoch.
 Hasil di bawah berasal dari run ke-4 (output tersimpan di notebook).
 
-| Metrik | Hasil |
+| Metrik | Hasil ResNet-50 |
 |---|---|
 | Train acc akhir | 98,75% |
 | Val acc akhir | 80% |
