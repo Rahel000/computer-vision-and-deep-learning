@@ -1,7 +1,7 @@
 # Deteksi Sendok dan Garpu dengan YOLOv8
 
-Praktik terpadu RET503 Computer Vision and Deep Learning (Minggu 4-7).
-Nama: Rahel Evanggelisa | NIM: 4222401022
+Praktik RET503 Computer Vision and Deep Learning.
+Nama: Rahel Evanggelisa Mahanaim S | NIM: 4222401022
 
 Proyek ini melatih detektor objek YOLOv8 untuk dua kelas, **Fork** dan **Spoon**, memakai dataset foto sendiri. Tiga eksperimen dibandingkan: transfer learning (E1), pelatihan dari nol (E2), dan satu percobaan tuning (E3).
 
