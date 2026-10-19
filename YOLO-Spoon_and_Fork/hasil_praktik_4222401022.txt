@@ -1,0 +1,17 @@
+==============================================================================
+  HASIL PRAKTIK - RET503 Computer Vision and Deep Learning
+==============================================================================
+  NIM / Nama    : 4222401022 / Rahel Evanggelisa
+  Waktu         : 19-10-2026 02:32:14
+  Komputer/user : DESKTOP-23ACP3A / DELL Precision
+  Dataset       : dataset_v1  (sidik jari label: 259A3EE8D89D)
+  Pengaturan    : model yolov8n, epochs 30, imgsz 416, batch 16
+==============================================================================
+  Eksperimen     Perubahan        mAP50  mAP50-95      P      R     ms   menit
+  E1_pretrained  -                0.936     0.814  0.955  0.867   38.2    19.5
+  E2_scratch     -                0.305     0.129  0.276  0.407   43.3    21.2
+  E3_tuning      imgsz=640        0.900     0.758  0.852  0.852  215.7    40.6
+==============================================================================
+  Model terpilih (mAP50-95 val tertinggi): E1_pretrained
+  Hasil di data TEST (sekali saja)       : mAP50 0.911 | mAP50-95 0.790
+==============================================================================

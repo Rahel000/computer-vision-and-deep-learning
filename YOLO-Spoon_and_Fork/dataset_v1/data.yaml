@@ -1,0 +1,8 @@
+path: C:/Users/DELL Precision/Downloads/YOLO/dataset_v1     # Sesuaikan path di laptop masing-masing
+train: train/images
+val: valid/images
+test: test/images
+
+names:
+  0: Fork
+  1: Spoon

@@ -1,0 +1,4 @@
+eksperimen   , perubahan, pretrained, mAP50 , mAP50-95, precision, recall, inferensi_ms, waktu_latih_menit, imgsz, bobot
+E1_pretrained, -        , True      , 0.9358,   0.8141,    0.9549, 0.8666,        38.16,             19.52,   416, C:\Users\DELL Precision\Downloads\YOLO\hasil_praktik\E1_pretrained\weights\best.pt
+E2_scratch   , -        , False     , 0.3049,   0.1293,    0.2764, 0.407 ,        43.34,             21.18,   416, C:\Users\DELL Precision\Downloads\YOLO\hasil_praktik\E2_scratch\weights\best.pt
+E3_tuning    , imgsz=640, True      , 0.9003,   0.7585,    0.8521, 0.8516,       215.72,             40.57,   640, C:\Users\DELL Precision\Downloads\YOLO\hasil_praktik\E3_tuning\weights\best.pt
